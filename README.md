@@ -1,5 +1,10 @@
 # Agent Vault
 
+[![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+![Protocol: plain markdown](https://img.shields.io/badge/protocol-plain%20markdown-blue)
+![Works with](https://img.shields.io/badge/works%20with-Claude%20Code%20%C2%B7%20Codex%20%C2%B7%20Gemini%20CLI-8A2BE2)
+![No server required](https://img.shields.io/badge/coordination-no%20server%20required-brightgreen)
+
 A protocol and Claude Code skill for coordinating multiple AI agents — Claude sessions, Codex, Gemini CLI, or any mix — by treating an Obsidian vault (or any folder of markdown files) as a persistent shared blackboard.
 
 There is no central coordinator. Every agent reads the canonical state on entry, posts a one-line note to a shared append-only log after each meaningful action, and writes detailed work to its own private namespace. The protocol survives both local-filesystem and synced setups (git, Obsidian Sync, Dropbox) without any locking server.
@@ -65,6 +70,29 @@ All four point at the same canonical `_multi-agent/AGENT_INSTRUCTIONS.md`. Edit 
 Pass `--bridge-tools claude,codex,gemini` to control which entry pointers are written, or `--no-codex-skill` to skip the Codex skill copy.
 
 ## How it works
+
+```mermaid
+flowchart LR
+    subgraph vault["Shared vault  ·  _multi-agent/"]
+        events["events.md<br/>append-only log"]
+        index["index.md<br/>where things stand"]
+        tasks["tasks/<br/>one owner each"]
+    end
+
+    A["Claude session"] -->|"read on entry"| index
+    B["Codex"] -->|"read on entry"| index
+    C["Gemini CLI"] -->|"read on entry"| index
+
+    A -->|"one-line note per action"| events
+    B -->|"one-line note per action"| events
+    C -->|"one-line note per action"| events
+
+    A --- pa["agents/claude-…/<br/>private namespace"]
+    B --- pb["agents/codex-…/<br/>private namespace"]
+    C --- pc["agents/gemini-…/<br/>private namespace"]
+
+    tasks -.->|"handoff notes transfer ownership"| tasks
+```
 
 Three rules carry the whole protocol:
 
