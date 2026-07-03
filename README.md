@@ -142,4 +142,4 @@ Skip it for single-agent, single-session work. The overhead only pays off when s
 
 ## License
 
-[MIT](LICENSE)
+[MIT](LICENSE) . More details on LICENSE.md doc.
