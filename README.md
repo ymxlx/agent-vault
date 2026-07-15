@@ -1,6 +1,6 @@
 # Agent Vault
 
-[![tests](https://github.com/yehudalevy-collab/agent-vault/actions/workflows/tests.yml/badge.svg)](https://github.com/yehudalevy-collab/agent-vault/actions/workflows/tests.yml)
+[![tests](https://github.com/ymxlx/agent-vault/actions/workflows/tests.yml/badge.svg)](https://github.com/ymxlx/agent-vault/actions/workflows/tests.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 ![Protocol: plain markdown](https://img.shields.io/badge/protocol-plain%20markdown-blue)
 ![Works with](https://img.shields.io/badge/works%20with-Claude%20Code%20%C2%B7%20Codex%20%C2%B7%20Gemini%20CLI-8A2BE2)
